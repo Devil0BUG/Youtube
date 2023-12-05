@@ -1,16 +1,16 @@
 // ==UserScript==
-// @name         YouTube去广告 YouTube AD Blocker
-// @name:zh-CN   YouTube去广告
+// @name         YouTube去廣告 YouTube AD Blocker
+// @name:zh-CN   YouTube去廣告
 // @name:zh-TW   YouTube去廣告
 // @name:zh-HK   YouTube去廣告
 // @name:zh-MO   YouTube去廣告
 // @namespace    
 // @version      5.99
-// @description         这是一个去除YouTube广告的脚本，轻量且高效，它能丝滑的去除界面广告和视频广告，包括6s广告。This is a script that removes ads on YouTube, it's lightweight and efficient, capable of smoothly removing interface and video ads, including 6s ads.
-// @description:zh-CN   这是一个去除YouTube广告的脚本，轻量且高效，它能丝滑的去除界面广告和视频广告，包括6s广告。
-// @description:zh-TW   這是一個去除YouTube廣告的腳本，輕量且高效，它能絲滑地去除界面廣告和視頻廣告，包括6s廣告。
-// @description:zh-HK   這是一個去除YouTube廣告的腳本，輕量且高效，它能絲滑地去除界面廣告和視頻廣告，包括6s廣告。
-// @description:zh-MO   這是一個去除YouTube廣告的腳本，輕量且高效，它能絲滑地去除界面廣告和視頻廣告，包括6s廣告。
+// @description         這是一個去除YouTube廣告的腳本，輕量且高效，它能絲滑的去除介面廣告和影片廣告，包括6s廣告。This is a script that removes ads on YouTube, it's lightweight and efficient, capable of smoothly removing interface and video ads, including 6s ads.
+// @description:zh-CN   這是一個去除YouTube廣告的腳本，輕量且高效，它能絲滑的去除介面廣告和影片廣告，包括6s廣告。
+// @description:zh-TW   這是一個去除YouTube廣告的腳本，輕量且高效，它能絲滑的去除介面廣告和影片廣告，包括6s廣告。
+// @description:zh-HK   這是一個去除YouTube廣告的腳本，輕量且高效，它能絲滑的去除介面廣告和影片廣告，包括6s廣告。
+// @description:zh-MO   這是一個去除YouTube廣告的腳本，輕量且高效，它能絲滑的去除介面廣告和影片廣告，包括6s廣告。
 // @author       iamfugui
 // @match        *://*.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=YouTube.com
@@ -20,31 +20,31 @@
 (function() {
     `use strict`;
  
-    //界面广告选择器
+    //介面廣告選擇器
     const cssSeletorArr = [
-        `#masthead-ad`,//首页顶部横幅广告.
-        `ytd-rich-item-renderer.style-scope.ytd-rich-grid-row #content:has(.ytd-display-ad-renderer)`,//首页视频排版广告.
-        `.video-ads.ytp-ad-module`,//播放器底部广告.
-        `tp-yt-paper-dialog:has(yt-mealbar-promo-renderer)`,//播放页会员促销广告.
-        `ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-ads"]`,//播放页右上方推荐广告.
-        `#related #player-ads`,//播放页评论区右侧推广广告.
-        `#related ytd-ad-slot-renderer`,//播放页评论区右侧视频排版广告.
-        `ytd-ad-slot-renderer`,//搜索页广告.
-        `yt-mealbar-promo-renderer`,//播放页会员推荐广告.
-        `ad-slot-renderer`,//M播放页第三方推荐广告
-        `ytm-companion-ad-renderer`,//M可跳过的视频广告链接处
+        `#masthead-ad`,//首頁頂部橫幅廣告.
+        `ytd-rich-item-renderer.style-scope.ytd-rich-grid-row #content:has(.ytd-display-ad-renderer)`,//首頁影片排版廣告.
+        `.video-ads.ytp-ad-module`,//播放器底部廣告.
+        `tp-yt-paper-dialog:has(yt-mealbar-promo-renderer)`,//播放頁會員促銷廣告.
+        `ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-ads"]`,//播放頁右上方推薦廣告.
+        `#related #player-ads`,//播放頁評論區右側推廣廣告.
+        `#related ytd-ad-slot-renderer`,//播放頁評論區右側影片排版廣告.
+        `ytd-ad-slot-renderer`,//搜尋頁廣告.
+        `yt-mealbar-promo-renderer`,//播放頁會員推薦廣告.
+        `ad-slot-renderer`,//M播放頁第三方推薦廣告
+        `ytm-companion-ad-renderer`,//M可跳過的影片廣告連結處
     ];
  
-    window.dev=false;//开发使用
+    window.dev=false;//開發使用
  
     /**
-    * 将标准时间格式化
-    * @param {Date} time 标准时间
+    * 將標準時間格式化
+    * @param {Date} time 標準時間
     * @param {String} format 格式
     * @return {String}
     */
     function moment(time, format = `YYYY-MM-DD HH:mm:ss`) {
-        // 获取年⽉⽇时分秒
+        // 取得年⽉⽇時分秒
         let y = time.getFullYear()
         let m = (time.getMonth() + 1).toString().padStart(2, `0`)
         let d = time.getDate().toString().padStart(2, `0`)
@@ -59,8 +59,8 @@
     }
  
     /**
-    * 输出信息
-    * @param {String} msg 信息
+    * 輸出訊息
+    * @param {String} msg 資訊
     * @return {undefined}
     */
     function log(msg) {
@@ -71,7 +71,7 @@
     }
  
     /**
-    * 设置运行标志
+    * 設定運行標誌
     * @param {String} name
     * @return {undefined}
     */
@@ -82,7 +82,7 @@
     }
  
     /**
-    * 获取运行标志
+    * 取得運行標誌
     * @param {String} name
     * @return {undefined|Element}
     */
@@ -91,7 +91,7 @@
     }
  
     /**
-    * 检查是否设置了运行标志
+    * 檢查是否設定了運行標誌
     * @param {String} name
     * @return {Boolean}
     */
@@ -105,39 +105,39 @@
     }
  
     /**
-    * 生成去除广告的css元素style并附加到HTML节点上
+    * 生成去除廣告的css元素style並附加到HTML節點上
     * @param {String} styles 样式文本
     * @return {undefined}
     */
     function generateRemoveADHTMLElement(styles) {
-        //如果已经设置过,退出.
+        //如果已經設定過,退出.
         if (checkRunFlag(`RemoveADHTMLElement`)) {
-            log(`屏蔽页面广告节点已生成`);
+            log(`屏蔽頁面廣告節點已生成`);
             return false
         }
  
-        //设置移除广告样式.
-        let style = document.createElement(`style`);//创建style元素.
-        (document.querySelector(`head`) || document.querySelector(`body`)).appendChild(style);//将节点附加到HTML.
-        style.appendChild(document.createTextNode(styles));//附加样式节点到元素节点.
-        log(`生成屏蔽页面广告节点成功`)
+        //設定移除廣告樣式.
+        let style = document.createElement(`style`);//創建style元素.
+        (document.querySelector(`head`) || document.querySelector(`body`)).appendChild(style);//將節點附加到HTML.
+        style.appendChild(document.createTextNode(styles));//附加樣式節點到元素節點.
+        log(`生成屏蔽頁面廣告節點成功`)
  
     }
  
     /**
-    * 生成去除广告的css文本
-    * @param {Array} cssSeletorArr 待设置css选择器数组
+    * 生成去除廣告的css文本
+    * @param {Array} cssSeletorArr 待設定css選擇器數組
     * @return {String}
     */
     function generateRemoveADCssText(cssSeletorArr){
         cssSeletorArr.forEach((seletor,index)=>{
-            cssSeletorArr[index]=`${seletor}{display:none!important}`;//遍历并设置样式.
+            cssSeletorArr[index]=`${seletor}{display:none!important}`;//遍歷並設定樣式.
         });
-        return cssSeletorArr.join(` `);//拼接成字符串.
+        return cssSeletorArr.join(` `);//拼接成字串.
     }
  
     /**
-    * 触摸事件
+    * 觸摸事件
     * @return {undefined}
     */
     function nativeTouch(){
@@ -146,7 +146,7 @@
         const randomNum = (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum)/1000;
  
         let element =this;
-        // 创建 Touch 对象
+        // 創建 Touch 物件
         let touch = new Touch({
             identifier: Date.now(),
             target: element,
@@ -158,7 +158,7 @@
             force: 1
         });
  
-        // 创建 TouchEvent 对象
+        // 創建 TouchEvent 物件
         let touchStartEvent = new TouchEvent("touchstart", {
             bubbles: true,
             cancelable: true,
@@ -168,10 +168,10 @@
             changedTouches: [touch]
         });
  
-        // 分派 touchstart 事件到目标元素
+        // 分派 touchstart 事件到目標元素
         element.dispatchEvent(touchStartEvent);
  
-        // 创建 TouchEvent 对象
+        // 創建 TouchEvent 物件
         let touchEndEvent = new TouchEvent("touchend", {
             bubbles: true,
             cancelable: true,
@@ -181,21 +181,21 @@
             changedTouches: [touch]
         });
  
-        // 分派 touchend 事件到目标元素
+        // 分派 touchend 事件到目標元素
         element.dispatchEvent(touchEndEvent);
     }
  
     /**
-    * 跳过广告
+    * 跳過廣告
     * @return {undefined}
     */
     function skipAd(mutationsList, observer) {
-        let video = document.querySelector(`.ad-showing video`) || document.querySelector(`video`);//获取视频节点
+        let video = document.querySelector(`.ad-showing video`) || document.querySelector(`video`);//取得視訊節點
         let skipButton = document.querySelector(`.ytp-ad-skip-button`) || document.querySelector(`.ytp-ad-skip-button-modern`);
         let shortAdMsg = document.querySelector(`.video-ads.ytp-ad-module .ytp-ad-player-overlay`);
  
         if(skipButton){
-            //拥有跳过按钮的广告.
+            //擁有跳過按鈕的廣告.
             log(`总时长:`);
             log(`${video.duration}`)
             log(`当前时间:`);
@@ -203,49 +203,49 @@
             // 跳过广告.
             skipButton.click();//PC
             nativeTouch.call(skipButton);//Phone
-            log(`按钮跳过了该广告~~~~~~~~~~~~~`);
+            log(`按鈕跳過了該廣告~~~~~~~~~~~~~`);
         }else if(shortAdMsg){
-            //没有跳过按钮的短广告.
-            log(`总时长:`);
+            //沒有跳過按鈕的短廣告.
+            log(`總時長:`);
             log(`${video.duration}`)
-            log(`当前时间:`);
+            log(`目前時間:`);
             log(`${video.currentTime}`)
             video.currentTime = video.duration;
-            log(`强制结束了该广告~~~~~~~~~~~~~`);
+            log(`強制結束了該廣告~~~~~~~~~~~~~`);
         }else{
-            log(`######广告不存在######`);
+            log(`######廣告不存在######`);
         }
     }
  
     /**
-    * 去除播放中的广告
+    * 去除播放中的廣告
     * @return {undefined}
     */
     function removePlayerAD(){
-        //如果已经在运行,退出.
+        //如果已經在運行,退出.
         if (checkRunFlag(`removePlayerAD`)) {
-            log(`去除播放中的广告功能已在运行`);
+            log(`去除播放中的廣告功能已在運行`);
             return false
         }
-        let observer;//监听器
-        let timerID;//定时器
+        let observer;//監聽器
+        let timerID;//定時器
  
-        //开始监听
+        //開始監聽
         function startObserve(){
-            //广告节点监听
+            //廣告節點監聽
             const targetNode = document.querySelector(`.video-ads.ytp-ad-module`);
             if(!targetNode){
-                log(`正在寻找待监听的目标节点`);
+                log(`正在尋找待監聽的目標節點`);
                 return false;
             }
-            //监听视频中的广告并处理
-            const config = {childList: true, subtree: true };// 监听目标节点本身与子树下节点的变动
-            observer = new MutationObserver(skipAd);// 创建一个观察器实例并设置处理广告的回调函数
-            observer.observe(targetNode, config);// 以上述配置开始观察广告节点
-            timerID=setInterval(skipAd, 1000);//漏网鱼
+            //監聽影片中的廣告並處理
+            const config = {childList: true, subtree: true };// 監聽目標節點本身與子樹下節點的變動
+            observer = new MutationObserver(skipAd);// 建立一個觀察器實例並設定處理廣告的回呼函數
+            observer.observe(targetNode, config);// 以上述配置開始觀察廣告節點
+            timerID=setInterval(skipAd, 1000);//漏網魚
         }
  
-        //轮询任务
+        //輪詢任務
         let startObserveID = setInterval(()=>{
             if(!(observer && timerID)){
                 startObserve();
@@ -254,23 +254,23 @@
             }
         },16);
  
-        log(`运行去除播放中的广告功能成功`)
+        log(`運行去除播放中的廣告功能成功`)
     }
  
     /**
     * main函数
     */
     function main(){
-        generateRemoveADHTMLElement(generateRemoveADCssText(cssSeletorArr));//移除界面中的广告.
-        removePlayerAD();//移除播放中的广告.
+        generateRemoveADHTMLElement(generateRemoveADCssText(cssSeletorArr));//移除介面中的廣告.
+        removePlayerAD();//移除播放中的廣告.
     }
  
     if (document.readyState === `loading`) {
-        log(`YouTube去广告脚本即将调用:`);
-        document.addEventListener(`DOMContentLoaded`, main);// 此时加载尚未完成
+        log(`YouTube去廣告腳本即將調用:`);
+        document.addEventListener(`DOMContentLoaded`, main);// 此時載入尚未完成
     } else {
-        log(`YouTube去广告脚本快速调用:`);
-        main();// 此时`DOMContentLoaded` 已经被触发
+        log(`YouTube去廣告腳本快速調用:`);
+        main();// 此时`DOMContentLoaded` 已經被觸發
     }
  
 })();
